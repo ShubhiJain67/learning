@@ -21,8 +21,12 @@ Simple Queue Service
 > Messages in a queue are spread accross multiple servers in Amazon and the messages are duplicated all over the server
 
 ### Message Lifecycle
-Producer Sends Message in a Queue ---`SendMessage`---> Consumer Receives Message from the Queue ---`DeleteMessage`---> Consumer process the message and deletes the message within the Visibility Timeout Period
+Producer Sends Message in a Queue --- `SendMessage` ------ `ReceiveMessage` ---> Consumer Receives Message from the Queue ---`DeleteMessage`---> Consumer process the message and deletes the message within the Visibility Timeout Period
 > **Visibility Timeout Period - Default `30 sec` Min `0 sec` Max `12 hrs`**
+
+Amazon SQS automatically deletes messages that have been in a queue for more than the maximum message retention period.
+
+> **Maximum Message Retention Period - Default `4 days` Min `60 sec` Max `14 days`**
 
 ### In Flight Messages
 1. Sent Messages by a Producer
