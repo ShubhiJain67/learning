@@ -22,20 +22,20 @@ Simple Queue Service
 
 ### Queues
 1. Standard Queue 
-  - Provide best-effort ordering which ensures that messages are generally delivered in the same order as they are sent. Occasionally (because of the highly-distributed architecture that allows high throughput), more than one copy of a message might be delivered out of order.
-  - guarantee that a message is delivered at least once and duplicates can be introduced into the queue.
-  - allow nearly-unlimited number of transactions per second.
-  - are available in all the regions.
-  - supported by all AWS services.
+
 2. FIFO Queue - Order matters
+  - Order is critical
+  - Order is on the basis of messgaes pushed in the queue
+  - 
 
 ### Message Lifecycle
-Producer Sends Message in a Queue --- `SendMessage` ------ `ReceiveMessage` ---> Consumer Receives Message from the Queue ---`DeleteMessage`---> Consumer process the message and deletes the message within the Visibility Timeout Period
-> **Visibility Timeout Period - Default `30 sec` Min `0 sec` Max `12 hrs`**
+Producer Sends Message in a Queue --- `SendMessage` ------ `ReceiveMessage` ---> Consumer Receives Message from the Queue ---`DeleteMessage`---> Consumer process the message and deletes the message within the `VisibilityTimeout`
 
-Amazon SQS automatically deletes messages that have been in a queue for more than the maximum message retention period.
+> **`VisibilityTimeout` - Default `30 sec` Min `0 sec` Max `12 hrs`**
 
-> **Maximum Message Retention Period - Default `4 days` Min `60 sec` Max `14 days`**
+Amazon SQS automatically deletes messages that have been in a queue for more than the `MessageRetentionPeriod`.
+
+> **`MessageRetentionPeriod` - Default `4 days` Min `60 sec` Max `14 days`**
 
 ### In Flight Messages
 1. Sent Messages by a Producer
@@ -44,9 +44,16 @@ Amazon SQS automatically deletes messages that have been in a queue for more tha
 
 State btw 1 and 2 **Stored Message** - Unlimited Messages
 State btw 2 and 3 **In Flight Message** - Limited Messages
+  - Standard Queue - Max `1,20,000`
+    - If via Short Polling - AWS SQS returns `OverLimit`
+    - If via Long Polling - AWS SQS returns nothing
+  - FIFO Queue - Max `20,000` - AWS SQS returns nothing
 
-Standard Queue - Max `1,20,000`
-1. If via Short Polling - AWS SQS returns `OverLimit`
-2. If via Long Polling - AWS SQS returns nothing
-
-FIFO Queue - Max `20,000` - AWS SQS returns nothing
+### Pricing
+1. Cost of Interactions with S3
+2. Cost of key management services
+3. Number of requests/action     Standard       FIFO 
+   0 - 1 Million                  Free         Free
+   1 Million - 100 Billion        $0.40        $0.50
+   100 Billion - 200 Billion      $0.30        $0.40
+   200 Billion +                  $0.24        $0.35
