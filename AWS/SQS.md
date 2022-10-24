@@ -92,6 +92,15 @@ State btw 2 and 3 **In Flight Message** - Limited Messages
 - `DelaySeconds = Default (0 sec) Max (15 min)`
 
 
+> You can add metadata tags that identify a queue's purpose, owner, or environment
+
+### IMP Metrics
+- ApproximateNumberOfMessages
+- ApproximateNumberOfMessagesDelayed
+- ApproximateNumberOfMessagesNotVisible
+- ApproximateNumberOfMessagesVisible
+
+
 ## Topics to write about
 1. ~~Short Polling~~
 2. ~~Long Polling~~
@@ -101,3 +110,5 @@ State btw 2 and 3 **In Flight Message** - Limited Messages
 6. Temporary Queue
 7. Message Timmers
 8. Retries
+9. Queue and message identifiers
+10. Message metadata
