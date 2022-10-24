@@ -73,10 +73,22 @@ State btw 2 and 3 **In Flight Message** - Limited Messages
     - 1 Request can have 1-10 messages upto 256KB
     - Every 64KB 1 Action
 
+### Short Polling
+- The `ReceiveMessage` request queries only a subset of servers to find any new message
+- AWS SQS right away sends a response back even if no message is found
+- When `ReceiveMessage` sets `WaitTimeSeconds = 0` or `ReceiveMessageWaitTimeSeconds = 0`
+- A lot of empty and false empty responses (because a subset is only queried) are recieved.
+
+### Long Polling
+- The `ReceiveMessage` request queries all of the servers to find any new message
+- AWS SQS waits for atleast 1 message, up to maximum number of messages specified in the request.
+- It returns with a empty response only if the olling time expires
+- When `ReceiveMessage` sets `WaitTimeSeconds > 0 (Max 20 sec)` or `ReceiveMessageWaitTimeSeconds = 0`
+- Reduces cost as it reduces the number of empty responses or false empty response
 
 ## Topics to write about
-1. Short Polling
-2. Long Polling
+1. ~~Short Polling~~
+2. ~~Long Polling~~
 3. Visibility Timeout
 4. Dead letter queue
 5. Delay Queue
