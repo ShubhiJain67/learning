@@ -86,12 +86,18 @@ State btw 2 and 3 **In Flight Message** - Limited Messages
 - When `ReceiveMessage` sets `WaitTimeSeconds > 0 (Max 20 sec)` or `ReceiveMessageWaitTimeSeconds = 0`
 - Reduces cost as it reduces the number of empty responses or false empty response
 
+### Delay Queue
+- Lets you postpone the delivery of a new message
+- Gives time to the consumers to process the previous messages 
+- `DelaySeconds = Default (0 sec) Max (15 min)`
+
+
 ## Topics to write about
 1. ~~Short Polling~~
 2. ~~Long Polling~~
 3. Visibility Timeout
 4. Dead letter queue
-5. Delay Queue
+5. ~~Delay Queue~~
 6. Temporary Queue
 7. Message Timmers
 8. Retries
