@@ -22,14 +22,21 @@ Simple Queue Service
 
 ### Queues
 1. Standard Queue 
+  - Nearly Unlimited API method (`SendMessage`, `ReceiveMessage`, `DeleteMessage`) 
+  - A message is delivered atleast once but ocassionally more than 1 copy is delivered
+  - Ocassionally messages are delivered in order which it has been received
+  - Decoples live user from enetring into background work
 
 2. FIFO Queue - Order matters
-  - Order is critical
-  - Order is on the basis of messgaes pushed in the queue
-  - 
+  - Uses Batching
+  - 3000 calls per second for every API method (`SendMessageBatch`, `ReceiveMessage`, `DeleteMessageBatch`) = 300 API Calls each with a batch of 10 messages
+  - Order is critical (Order is on the basis of messgaes pushed in the queue)
 
 ### Message Lifecycle
-Producer Sends Message in a Queue --- `SendMessage` ------ `ReceiveMessage` ---> Consumer Receives Message from the Queue ---`DeleteMessage`---> Consumer process the message and deletes the message within the `VisibilityTimeout`
+`SendMessage` Producer Sends Message in a Queue 
+`ReceiveMessage` Consumer Receives Message from the Queue 
+`DeleteMessage` Consumer process the message and deletes the message within the `VisibilityTimeout`
+`PurgeQueue` Remove all messages from queue keeping the queue in place
 
 > **`VisibilityTimeout` - Default `30 sec` Min `0 sec` Max `12 hrs`**
 
@@ -57,3 +64,22 @@ State btw 2 and 3 **In Flight Message** - Limited Messages
    1 Million - 100 Billion        $0.40        $0.50
    100 Billion - 200 Billion      $0.30        $0.40
    200 Billion +                  $0.24        $0.35
+4. Request = Action
+  - API Action
+    - Sending Message
+    - Receiving Message
+    - Deleting Message
+    - Changing Visibility Message (For FIFO)
+    - 1 Request can have 1-10 messages upto 256KB
+    - Every 64KB 1 Action
+
+
+## Topics to write about
+1. Short Polling
+2. Long Polling
+3. Visibility Timeout
+4. Dead letter queue
+5. Delay Queue
+6. Temporary Queue
+7. Message Timmers
+8. Retries
