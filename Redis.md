@@ -37,6 +37,8 @@ Features
 - Offers pub/sub messaging system
 - Supports A LOT of Languages
 
+**IN CASE OF SYSTEM FAILURE WE MIGHT LOOSE ALL THE DATA WHICH IS NOT STORED - This is the trade off btw the speed and durability**
+
 ### Some Commands
 ```
 redis-server
@@ -63,13 +65,15 @@ decrbyfloat
 ### Time to live
 ```
 expire <string name> <time in seconds>
+expireat <string name> <timestamp>
 ttl <string name> -> tells the ttl time
 setex <key> <ttl in sec> <value>
 ```
 
-### Fluss all data in redis
+### Delete
 ```
-flushall
+del <string name> - specified key
+flushall - all keys
 ```
 
 ```
@@ -83,3 +87,7 @@ keys * -> gives all keys
 4. Not deployed widely
 
 ## Used By - Twitter, Stackoverflow, Github
+
+
+### ToDo
+1. How to inhance durability of Redis
