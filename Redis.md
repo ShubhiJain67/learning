@@ -1,11 +1,13 @@
 # Redis
 
 Is **REmote DIctionary Sevrer**
-- In memory data structure store
+- In memory data structure store (Hence providing **VERY GOOD PERFORMANCE**)
 - No SQL Database - allows user to store vast data without the limitations of relation DB
 - Cache
 - Message broker
+- Prefered to store smal and frequently accessed data
 
+Written in ANSI C
 
 Supports-
 - Hashes
@@ -28,7 +30,7 @@ Features
 - Very good speed - Whole data is in primary memory hence exponentially fast, can perform `110000 SETs/ sec` an `81000 GETs/sec`
 - Changes are asynchronously saved on the database
 - Multiple values can be get and set in a single command to speed up communication.
-- All operations are atomic hence ensuring that if 2 clients the redis server will receive the updated value
+- **All operations are atomic** hence ensuring that if 2 clients the redis server will receive the updated value
 - Allows storing KV Pairs > 512MB upto 1GB
 - Uses own hashing mechanism `Redis Hasing`
 - Offers Data Replicatioon - Runs on a master slave cache node. Slaves always listen to the master node. When ever th master node gets updated the slaves also get updated. It can update the slaves asynchronously as well.Thus can withstand failures.
@@ -73,3 +75,11 @@ flushall
 ```
 keys * -> gives all keys
 ```
+
+### Disadvantages
+1. Single Threaded
+2. limited client support for consistent hashing
+3. Significant Overhead of persistence 
+4. Not deployed widely
+
+## Used By - Twitter, Stackoverflow, Github
