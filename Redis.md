@@ -1,6 +1,6 @@
 # Redis
 
-Is a
+Is **REmote DIctionary Sevrer**
 - In memory data structure store
 - No SQL Database - allows user to store vast data without the limitations of relation DB
 - Cache
