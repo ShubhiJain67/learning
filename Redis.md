@@ -23,10 +23,16 @@ Supports-
 They can be on same or differnet computers
 Can be configured as master slave
 
+Advantages
 Very good speed - Whole data is in primary memory hence exponentially fast, can perform `110000 SETs/ sec` an `81000 GETs/sec`
 Changes are asynchronously saved on the database
 Multiple values can be get and set in a single command to speed up communication.
 All operations are atomic hence ensuring that if 2 clients the redis server will receive the updated value
+- Allows storing KV Pairs > 512MB upto 1GB
+- Uses own hashing mechanism `Redis Hasing`
+- Offers Data Replicatioon - Runs on a master slave cache node. Slaves always listen to the master node. When ever th master node gets updated the slaves also get updated. It can update the slaves asynchronously as well.Thus can withstand failures.
+- Offers pub/sub messaging system
+-   
 
 ### Some Commands
 ```
@@ -49,8 +55,20 @@ decr <string nmame> -> Derements the value by 1 (valid for integer, float values
 decrby <string name> count
 incrbyfloat
 decrbyfloat
+```
 
+### Time to live
+```
 expire <string name> <time in seconds>
 ttl <string name> -> tells the ttl time
 setex <key> <ttl in sec> <value>
+```
+
+### Fluss all data in redis
+```
+flushall
+```
+
+```
+keys * -> gives all keys
 ```
