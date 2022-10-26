@@ -1,6 +1,6 @@
-opensource
-used for event monitoring and alerting
-written in GO
+- opensource
+- used for event monitoring and alerting
+- written in GO
 
 a multi-dimensional data model with time series data identified by metric name and key/value pairs
 PromQL, a flexible query language to leverage this dimensionality
